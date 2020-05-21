@@ -2,6 +2,8 @@
 
 A collection of classical ML equations in Latex . Some of them are provided with simple notes and paper link. Hopes to help writings such as papers and blogs.
 
+Better viewed at https://blmoistawinde.github.io/ml_equations_latex/
+
 - [Classical ML Equations in LaTeX](#classical-ml-equations-in-latex)
   - [Model](#model)
     - [RNNs(LSTM, GRU)](#rnnslstm-gru)
