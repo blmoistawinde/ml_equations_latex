@@ -10,9 +10,13 @@ Better viewed at https://blmoistawinde.github.io/ml_equations_latex/
     - [Attentional Seq2seq](#attentional-seq2seq)
       - [Bahdanau Attention](#bahdanau-attention)
       - [Luong(Dot-Product) Attention](#luongdot-product-attention)
-    - [transformer](#transformer)
+    - [Transformer](#transformer)
       - [Scaled Dot-Product attention](#scaled-dot-product-attention)
       - [Multi-head attention](#multi-head-attention)
+    - [Generative Adversarial Networks(GAN)](#generative-adversarial-networksgan)
+      - [Minmax game objective](#minmax-game-objective)
+    - [Variational Auto-Encoder(VAE)](#variational-auto-encodervae)
+      - [Reparameterization trick](#reparameterization-trick)
   - [Activations](#activations)
     - [Sigmoid](#sigmoid)
     - [Softmax](#softmax)
@@ -98,6 +102,10 @@ Paper: [Neural Machine Translation by Jointly Learning to Align and Translate](h
 
 $$e_{ik} = v^T tanh(W[s_{i-1}; h_j])$$
 
+```
+e_{ik} = v^T tanh(W[s_{i-1}; h_j])
+```
+
 #### Luong(Dot-Product) Attention
 
 Paper: [Effective Approaches to Attention-based Neural Machine Translation](https://arxiv.org/abs/1508.04025)
@@ -126,7 +134,7 @@ s_t = tanh(W[s_{t-1};y_t;c_t])
 o_t = softmax(Vs_t)
 ```
 
-### transformer
+### Transformer
 
 Paper: [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
@@ -142,7 +150,7 @@ where $\sqrt{d_k}$ is the dimension of the key vector $k$ and query vector $q$ .
 
 #### Multi-head attention
 
-$$MultiHead(Q, K, V ) = Concat(head_1, ..., head_h)W^O$$
+$$MultiHead(Q, K, V) = Concat(head_1, ..., head_h)W^O$$
 
 where 
 $$
@@ -150,9 +158,55 @@ head_i = Attention(Q W^Q_i, K W^K_i, V W^V_i)
 $$
 
 ```
-MultiHead(Q, K, V ) = Concat(head_1, ..., head_h)W^O
+MultiHead(Q, K, V) = Concat(head_1, ..., head_h)W^O
 
 head_i = Attention(Q W^Q_i, K W^K_i, V W^V_i)
+```
+
+### Generative Adversarial Networks(GAN)
+
+Paper: [Generative Adversarial Networks](https://arxiv.org/abs/1406.2661)
+
+#### Minmax game objective
+
+$$
+\min_{G}\max_{D}\mathbb{E}_{x\sim p_{\text{data}}(x)}[\log{D(x)}] +  \mathbb{E}_{z\sim p_{\text{generated}}(z)}[1 - \log{D(G(z))}]
+$$
+
+```
+\min_{G}\max_{D}\mathbb{E}_{x\sim p_{\text{data}}(x)}[\log{D(x)}] +  \mathbb{E}_{z\sim p_{\text{generated}}(z)}[1 - \log{D(G(z))}]
+```
+
+
+### Variational Auto-Encoder(VAE)
+
+Paper: [Auto-Encoding Variational Bayes](https://arxiv.org/abs/1312.6114)
+
+#### Reparameterization trick
+
+To produce a latent variable z such that $z \sim q_{\mu, \sigma}(z) = \mathcal{N}(\mu, \sigma^2)$, we sample $\epsilon \sim \mathcal{N}(0,1)$, than z is produced by 
+
+$$z = \mu + \epsilon \cdot \sigma$$
+
+```
+z \sim q_{\mu, \sigma}(z) = \mathcal{N}(\mu, \sigma^2)
+\epsilon \sim \mathcal{N}(0,1)
+z = \mu + \epsilon \cdot \sigma
+```
+
+Above is for 1-D case. For a multi-dimensional (vector) case we use:
+
+$$
+\vec{\epsilon} \sim \mathcal{N}(0, \textbf{I})
+$$
+
+$$
+\vec{z} \sim \mathcal{N}(\vec{\mu}, \sigma^2 \textbf{I})
+$$
+
+```
+\epsilon \sim \mathcal{N}(0, \textbf{I})
+\vec{z} \sim \mathcal{N}(\vec{\mu}, \sigma^2 \textbf{I})
 ```
 
 ## Activations
@@ -282,11 +336,21 @@ Used in Support Vector Machine(SVM).
 
 $$max(0, 1 - y \cdot \hat{y})$$
 
+```
+max(0, 1 - y \cdot \hat{y})
+```
+
 #### KL/JS divergence
 
-$$KL(\hat{y} || y) = \sum_{c=1}^{M}\hat{y}_c \log{\frac{\hat{y}_c}{y_c}} $$
+$$KL(\hat{y} || y) = \sum_{c=1}^{M}\hat{y}_c \log{\frac{\hat{y}_c}{y_c}}$$
 
-$$JS(\hat{y} || y) = \frac{1}{2}(KL(y||\frac{y+\hat{y}}{2}) + KL(\hat{y}||\frac{y+\hat{y}}{2})) $$
+$$JS(\hat{y} || y) = \frac{1}{2}(KL(y||\frac{y+\hat{y}}{2}) + KL(\hat{y}||\frac{y+\hat{y}}{2}))$$
+
+```
+KL(\hat{y} || y) = \sum_{c=1}^{M}\hat{y}_c \log{\frac{\hat{y}_c}{y_c}}
+
+v
+```
 
 ### Regularization
 
@@ -298,11 +362,19 @@ A regression model that uses L1 regularization technique is called *Lasso Regres
 
 $$Loss = Error(Y - \widehat{Y}) + \lambda \sum_1^n |w_i|$$
 
+```
+Loss = Error(Y - \widehat{Y}) + \lambda \sum_1^n |w_i|
+```
+
 #### L2 regularization
 
 A regression model that uses L1 regularization technique is called *Ridge Regression*.
 
 $$Loss = Error(Y - \widehat{Y}) +  \lambda \sum_1^n w_i^{2}$$
+
+```
+Loss = Error(Y - \widehat{Y}) +  \lambda \sum_1^n w_i^{2}
+```
 
 ## Metrics
 
@@ -434,5 +506,9 @@ Moreover, there is a trend towards more complex metrics, which have to be calcul
 [Machine Learning Glossary](https://ml-cheatsheet.readthedocs.io/en/latest/index.html)
 
 [Wikipedia](https://en.wikipedia.org/)
+
+https://blog.floydhub.com/gans-story-so-far/
+
+https://ermongroup.github.io/cs228-notes/extras/vae/
 
 Thanks for [a-rodin's solution](https://gist.github.com/a-rodin/fef3f543412d6e1ec5b6cf55bf197d7b) to show Latex in Github markdown, which I have wrapped into `latex2pic.py`.

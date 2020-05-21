@@ -10,9 +10,13 @@ Better viewed at https://blmoistawinde.github.io/ml_equations_latex/
     - [Attentional Seq2seq](#attentional-seq2seq)
       - [Bahdanau Attention](#bahdanau-attention)
       - [Luong(Dot-Product) Attention](#luongdot-product-attention)
-    - [transformer](#transformer)
+    - [Transformer](#transformer)
       - [Scaled Dot-Product attention](#scaled-dot-product-attention)
       - [Multi-head attention](#multi-head-attention)
+    - [Generative Adversarial Networks(GAN)](#generative-adversarial-networksgan)
+      - [Minmax game objective](#minmax-game-objective)
+    - [Variational Auto-Encoder(VAE)](#variational-auto-encodervae)
+      - [Reparameterization trick](#reparameterization-trick)
   - [Activations](#activations)
     - [Sigmoid](#sigmoid)
     - [Softmax](#softmax)
@@ -118,6 +122,10 @@ Paper: [Neural Machine Translation by Jointly Learning to Align and Translate](h
 
 
 
+```
+e_{ik} = v^T tanh(W[s_{i-1}; h_j])
+```
+
 #### Luong(Dot-Product) Attention
 
 Paper: [Effective Approaches to Attention-based Neural Machine Translation](https://arxiv.org/abs/1508.04025)
@@ -162,7 +170,7 @@ s_t = tanh(W[s_{t-1};y_t;c_t])
 o_t = softmax(Vs_t)
 ```
 
-### transformer
+### Transformer
 
 Paper: [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
@@ -184,7 +192,7 @@ where  ![math](https://render.githubusercontent.com/render/math?math=%5Csqrt%7Bd
 
 
 
-![math](https://render.githubusercontent.com/render/math?math=MultiHead%28Q%2C%20K%2C%20V%20%29%20%3D%20Concat%28head_1%2C%20...%2C%20head_h%29W%5EO)
+![math](https://render.githubusercontent.com/render/math?math=MultiHead%28Q%2C%20K%2C%20V%29%20%3D%20Concat%28head_1%2C%20...%2C%20head_h%29W%5EO)
 
 
 
@@ -196,9 +204,65 @@ where
 
 
 ```
-MultiHead(Q, K, V ) = Concat(head_1, ..., head_h)W^O
+MultiHead(Q, K, V) = Concat(head_1, ..., head_h)W^O
 
 head_i = Attention(Q W^Q_i, K W^K_i, V W^V_i)
+```
+
+### Generative Adversarial Networks(GAN)
+
+Paper: [Generative Adversarial Networks](https://arxiv.org/abs/1406.2661)
+
+#### Minmax game objective
+
+
+
+![math](https://render.githubusercontent.com/render/math?math=%5Cmin_%7BG%7D%5Cmax_%7BD%7D%5Cmathbb%7BE%7D_%7Bx%5Csim%20p_%7B%5Ctext%7Bdata%7D%7D%28x%29%7D%5B%5Clog%7BD%28x%29%7D%5D%20%2B%20%20%5Cmathbb%7BE%7D_%7Bz%5Csim%20p_%7B%5Ctext%7Bgenerated%7D%7D%28z%29%7D%5B1%20-%20%5Clog%7BD%28G%28z%29%29%7D%5D)
+
+
+
+```
+\min_{G}\max_{D}\mathbb{E}_{x\sim p_{\text{data}}(x)}[\log{D(x)}] +  \mathbb{E}_{z\sim p_{\text{generated}}(z)}[1 - \log{D(G(z))}]
+```
+
+
+### Variational Auto-Encoder(VAE)
+
+Paper: [Auto-Encoding Variational Bayes](https://arxiv.org/abs/1312.6114)
+
+#### Reparameterization trick
+
+To produce a latent variable z such that  ![math](https://render.githubusercontent.com/render/math?math=z%20%5Csim%20q_%7B%5Cmu%2C%20%5Csigma%7D%28z%29%20%3D%20%5Cmathcal%7BN%7D%28%5Cmu%2C%20%5Csigma%5E2%29) , we sample  ![math](https://render.githubusercontent.com/render/math?math=%5Cepsilon%20%5Csim%20%5Cmathcal%7BN%7D%280%2C1%29) , than z is produced by 
+
+
+
+![math](https://render.githubusercontent.com/render/math?math=z%20%3D%20%5Cmu%20%2B%20%5Cepsilon%20%5Ccdot%20%5Csigma)
+
+
+
+```
+z \sim q_{\mu, \sigma}(z) = \mathcal{N}(\mu, \sigma^2)
+\epsilon \sim \mathcal{N}(0,1)
+z = \mu + \epsilon \cdot \sigma
+```
+
+Above is for 1-D case. For a multi-dimensional (vector) case we use:
+
+
+
+![math](https://render.githubusercontent.com/render/math?math=%5Cvec%7B%5Cepsilon%7D%20%5Csim%20%5Cmathcal%7BN%7D%280%2C%20%5Ctextbf%7BI%7D%29)
+
+
+
+
+
+![math](https://render.githubusercontent.com/render/math?math=%5Cvec%7Bz%7D%20%5Csim%20%5Cmathcal%7BN%7D%28%5Cvec%7B%5Cmu%7D%2C%20%5Csigma%5E2%20%5Ctextbf%7BI%7D%29)
+
+
+
+```
+\epsilon \sim \mathcal{N}(0, \textbf{I})
+\vec{z} \sim \mathcal{N}(\vec{\mu}, \sigma^2 \textbf{I})
 ```
 
 ## Activations
@@ -370,6 +434,10 @@ Used in Support Vector Machine(SVM).
 
 
 
+```
+max(0, 1 - y \cdot \hat{y})
+```
+
 #### KL/JS divergence
 
 
@@ -383,6 +451,12 @@ Used in Support Vector Machine(SVM).
 ![math](https://render.githubusercontent.com/render/math?math=JS%28%5Chat%7By%7D%20%7C%7C%20y%29%20%3D%20%5Cfrac%7B1%7D%7B2%7D%28KL%28y%7C%7C%5Cfrac%7By%2B%5Chat%7By%7D%7D%7B2%7D%29%20%2B%20KL%28%5Chat%7By%7D%7C%7C%5Cfrac%7By%2B%5Chat%7By%7D%7D%7B2%7D%29%29)
 
 
+
+```
+KL(\hat{y} || y) = \sum_{c=1}^{M}\hat{y}_c \log{\frac{\hat{y}_c}{y_c}}
+
+v
+```
 
 ### Regularization
 
@@ -398,6 +472,10 @@ A regression model that uses L1 regularization technique is called *Lasso Regres
 
 
 
+```
+Loss = Error(Y - \widehat{Y}) + \lambda \sum_1^n |w_i|
+```
+
 #### L2 regularization
 
 A regression model that uses L1 regularization technique is called *Ridge Regression*.
@@ -407,6 +485,10 @@ A regression model that uses L1 regularization technique is called *Ridge Regres
 ![math](https://render.githubusercontent.com/render/math?math=Loss%20%3D%20Error%28Y%20-%20%5Cwidehat%7BY%7D%29%20%2B%20%20%5Clambda%20%5Csum_1%5En%20w_i%5E%7B2%7D)
 
 
+
+```
+Loss = Error(Y - \widehat{Y}) +  \lambda \sum_1^n w_i^{2}
+```
 
 ## Metrics
 
@@ -579,5 +661,9 @@ Moreover, there is a trend towards more complex metrics, which have to be calcul
 [Machine Learning Glossary](https://ml-cheatsheet.readthedocs.io/en/latest/index.html)
 
 [Wikipedia](https://en.wikipedia.org/)
+
+https://blog.floydhub.com/gans-story-so-far/
+
+https://ermongroup.github.io/cs228-notes/extras/vae/
 
 Thanks for [a-rodin's solution](https://gist.github.com/a-rodin/fef3f543412d6e1ec5b6cf55bf197d7b) to show Latex in Github markdown, which I have wrapped into `latex2pic.py`.

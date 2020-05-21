@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Classical ML Equations in LaTeX</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="classical-ml-equations-in-latex">Classical ML Equations in LaTeX</h1>
+<p>A collection of classical ML equations in Latex . Some of them are provided with simple notes and paper link. Hopes to help writings such as papers and blogs.</p>
+<p>Better viewed at <a href="https://blmoistawinde.github.io/ml_equations_latex/">https://blmoistawinde.github.io/ml_equations_latex/</a></p>
+<ul>
+<li><a href="#classical-ml-equations-in-latex">Classical ML Equations in LaTeX</a>
+<ul>
+<li><a href="#model">Model</a>
+<ul>
+<li><a href="#rnnslstm-gru">RNNs(LSTM, GRU)</a></li>
+<li><a href="#attentional-seq2seq">Attentional Seq2seq</a>
+<ul>
+<li><a href="#bahdanau-attention">Bahdanau Attention</a></li>
+<li><a href="#luongdot-product-attention">Luong(Dot-Product) Attention</a></li>
+</ul>
+</li>
+<li><a href="#transformer">Transformer</a>
+<ul>
+<li><a href="#scaled-dot-product-attention">Scaled Dot-Product attention</a></li>
+<li><a href="#multi-head-attention">Multi-head attention</a></li>
+</ul>
+</li>
+<li><a href="#generative-adversarial-networksgan">Generative Adversarial Networks(GAN)</a>
+<ul>
+<li><a href="#minmax-game-objective">Minmax game objective</a></li>
+</ul>
+</li>
+<li><a href="#variational-auto-encodervae">Variational Auto-Encoder(VAE)</a>
+<ul>
+<li><a href="#reparameterization-trick">Reparameterization trick</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#activations">Activations</a>
+<ul>
+<li><a href="#sigmoid">Sigmoid</a></li>
+<li><a href="#softmax">Softmax</a></li>
+<li><a href="#relu">Relu</a></li>
+</ul>
+</li>
+<li><a href="#loss">Loss</a>
+<ul>
+<li><a href="#regression">Regression</a>
+<ul>
+<li><a href="#mean-absolute-errormae">Mean Absolute Error(MAE)</a></li>
+<li><a href="#mean-squared-errormse">Mean Squared Error(MSE)</a></li>
+<li><a href="#huber-loss">Huber loss</a></li>
+</ul>
+</li>
+<li><a href="#classification">Classification</a>
+<ul>
+<li><a href="#cross-entropy">Cross Entropy</a></li>
+<li><a href="#negative-loglikelihood">Negative Loglikelihood</a></li>
+<li><a href="#hinge-loss">Hinge loss</a></li>
+<li><a href="#kljs-divergence">KL/JS divergence</a></li>
+</ul>
+</li>
+<li><a href="#regularization">Regularization</a>
+<ul>
+<li><a href="#l1-regularization">L1 regularization</a></li>
+<li><a href="#l2-regularization">L2 regularization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#metrics">Metrics</a>
+<ul>
+<li><a href="#classification-1">Classification</a>
+<ul>
+<li><a href="#accuracy-precision-recall-f1">Accuracy, Precision, Recall, F1</a></li>
+<li><a href="#sensitivity-specificity-and-auc">Sensitivity, Specificity and AUC</a></li>
+</ul>
+</li>
+<li><a href="#regression-1">Regression</a></li>
+<li><a href="#clustering">Clustering</a>
+<ul>
+<li><a href="#normalized-mutual-information-nmi">(Normalized) Mutual Information (NMI)</a></li>
+</ul>
+</li>
+<li><a href="#ranking">Ranking</a>
+<ul>
+<li><a href="#mean-average-precisionmap">(Mean) Average Precision(MAP)</a></li>
+</ul>
+</li>
+<li><a href="#similarityrelevance">Similarity/Relevance</a>
+<ul>
+<li><a href="#cosine">Cosine</a></li>
+<li><a href="#jaccard">Jaccard</a></li>
+<li><a href="#pointwise-mutual-informationpmi">Pointwise Mutual Information(PMI)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="model">Model</h2>
+<h3 id="rnnslstm-gru">RNNs(LSTM, GRU)</h3>
+<p>encoder hidden state  <img src="https://render.githubusercontent.com/render/math?math=h_t" alt="math">  at time step  <img src="https://render.githubusercontent.com/render/math?math=t" alt="math"></p>
+<p><img src="https://render.githubusercontent.com/render/math?math=h_t%20%3D%20RNN_%7Benc%7D%28x_t%2C%20h_%7Bt-1%7D%29" alt="math"></p>
+<p>decoder hidden state  <img src="https://render.githubusercontent.com/render/math?math=s_t" alt="math">  at time step  <img src="https://render.githubusercontent.com/render/math?math=t" alt="math"></p>
+<p><img src="https://render.githubusercontent.com/render/math?math=s_t%20%3D%20RNN_%7Bdec%7D%28y_t%2C%20s_%7Bt-1%7D%29" alt="math"></p>
+<pre><code><code><div>h_t = RNN_{enc}(x_t, h_{t-1})
+s_t = RNN_{dec}(y_t, s_{t-1})
+</div></code></code></pre>
+<p>The  <img src="https://render.githubusercontent.com/render/math?math=RNN_%7Benc%7D" alt="math"> ,  <img src="https://render.githubusercontent.com/render/math?math=RNN_%7Bdec%7D" alt="math">  are usually either</p>
+<ul>
+<li>
+<p>LSTM (paper: <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.676.4320&amp;rep=rep1&amp;type=pdf">Long short-term memory</a>)</p>
+</li>
+<li>
+<p>GRU (paper: <a href="https://arxiv.org/abs/1406.1078">Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation</a>).</p>
+</li>
+</ul>
+<h3 id="attentional-seq2seq">Attentional Seq2seq</h3>
+<p>The attention weight  <img src="https://render.githubusercontent.com/render/math?math=%5Calpha_%7Bij%7D" alt="math"> , the  <img src="https://render.githubusercontent.com/render/math?math=i" alt="math"> th decoder step over the  <img src="https://render.githubusercontent.com/render/math?math=j" alt="math"> th encoder step, resulting in context vector  <img src="https://render.githubusercontent.com/render/math?math=c_i" alt="math"></p>
+<p><img src="https://render.githubusercontent.com/render/math?math=c_i%20%3D%20%5Csum_%7Bj%3D1%7D%5E%7BT_x%7D%20%5Calpha_%7Bij%7Dh_j" alt="math"></p>
+<p><img src="https://render.githubusercontent.com/render/math?math=%5Calpha_%7Bij%7D%20%3D%20%5Cfrac%7B%5Cexp%28e_%7Bij%7D%29%7D%7B%5Csum_%7Bk%3D1%7D%5E%7BT_x%7D%20%5Cexp%28e_%7Bik%7D%29%7D" alt="math"></p>
+<p><img src="https://render.githubusercontent.com/render/math?math=e_%7Bik%7D%20%3D%20a%28s_%7Bi-1%7D%2C%20h_j%29" alt="math"></p>
+<pre><code><code><div>c_i = \sum_{j=1}^{T_x} \alpha_{ij}h_j
+
+\alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{k=1}^{T_x} \exp(e_{ik})}
+
+e_{ik} = a(s_{i-1}, h_j)
+</div></code></code></pre>
+<p><img src="https://render.githubusercontent.com/render/math?math=a" alt="math">  is an specific attention function, which can be</p>
+<h4 id="bahdanau-attention">Bahdanau Attention</h4>
+<p>Paper: <a href="https://arxiv.org/abs/1409.0473">Neural Machine Translation by Jointly Learning to Align and Translate</a></p>
+<p><img src="https://render.githubusercontent.com/render/math?math=e_%7Bik%7D%20%3D%20v%5ET%20tanh%28W%5Bs_%7Bi-1%7D%3B%20h_j%5D%29" alt="math"></p>
+<pre><code><code><div>e_{ik} = v^T tanh(W[s_{i-1}; h_j])
+</div></code></code></pre>
+<h4 id="luongdot-product-attention">Luong(Dot-Product) Attention</h4>
+<p>Paper: <a href="https://arxiv.org/abs/1508.04025">Effective Approaches to Attention-based Neural Machine Translation</a></p>
+<p>If  <img src="https://render.githubusercontent.com/render/math?math=s_i" alt="math">  and  <img src="https://render.githubusercontent.com/render/math?math=h_j" alt="math">  has same number of dimension.</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=e_%7Bik%7D%20%3D%20s_%7Bi-1%7D%5ET%20h_j" alt="math"></p>
+<p>otherwise</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=e_%7Bik%7D%20%3D%20s_%7Bi-1%7D%5ET%20W%20h_j" alt="math"></p>
+<pre><code><code><div>e_{ik} = s_{i-1}^T h_j
+
+e_{ik} = s_{i-1}^T W h_j
+</div></code></code></pre>
+<p>Finally, the output  <img src="https://render.githubusercontent.com/render/math?math=o_i" alt="math">  is produced by:</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=s_t%20%3D%20tanh%28W%5Bs_%7Bt-1%7D%3By_t%3Bc_t%5D%29" alt="math"></p>
+<p><img src="https://render.githubusercontent.com/render/math?math=o_t%20%3D%20softmax%28Vs_t%29" alt="math"></p>
+<pre><code><code><div>s_t = tanh(W[s_{t-1};y_t;c_t])
+o_t = softmax(Vs_t)
+</div></code></code></pre>
+<h3 id="transformer">Transformer</h3>
+<p>Paper: <a href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a></p>
+<h4 id="scaled-dot-product-attention">Scaled Dot-Product attention</h4>
+<p><img src="https://render.githubusercontent.com/render/math?math=Attention%28Q%2C%20K%2C%20V%29%20%3D%20softmax%28%5Cfrac%7BQK%5ET%7D%7B%5Csqrt%7Bd_k%7D%7D%29V" alt="math"></p>
+<pre><code><code><div>Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt{d_k}})V
+</div></code></code></pre>
+<p>where  <img src="https://render.githubusercontent.com/render/math?math=%5Csqrt%7Bd_k%7D" alt="math">  is the dimension of the key vector  <img src="https://render.githubusercontent.com/render/math?math=k" alt="math">  and query vector  <img src="https://render.githubusercontent.com/render/math?math=q" alt="math">  .</p>
+<h4 id="multi-head-attention">Multi-head attention</h4>
+<p><img src="https://render.githubusercontent.com/render/math?math=MultiHead%28Q%2C%20K%2C%20V%29%20%3D%20Concat%28head_1%2C%20...%2C%20head_h%29W%5EO" alt="math"></p>
+<p>where</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=head_i%20%3D%20Attention%28Q%20W%5EQ_i%2C%20K%20W%5EK_i%2C%20V%20W%5EV_i%29" alt="math"></p>
+<pre><code><code><div>MultiHead(Q, K, V) = Concat(head_1, ..., head_h)W^O
+
+head_i = Attention(Q W^Q_i, K W^K_i, V W^V_i)
+</div></code></code></pre>
+<h3 id="generative-adversarial-networksgan">Generative Adversarial Networks(GAN)</h3>
+<p>Paper: <a href="https://arxiv.org/abs/1406.2661">Generative Adversarial Networks</a></p>
+<h4 id="minmax-game-objective">Minmax game objective</h4>
+<p><img src="https://render.githubusercontent.com/render/math?math=%5Cmin_%7BG%7D%5Cmax_%7BD%7D%5Cmathbb%7BE%7D_%7Bx%5Csim%20p_%7B%5Ctext%7Bdata%7D%7D%28x%29%7D%5B%5Clog%7BD%28x%29%7D%5D%20%2B%20%20%5Cmathbb%7BE%7D_%7Bz%5Csim%20p_%7B%5Ctext%7Bgenerated%7D%7D%28z%29%7D%5B1%20-%20%5Clog%7BD%28G%28z%29%29%7D%5D" alt="math"></p>
+<pre><code><code><div>\min_{G}\max_{D}\mathbb{E}_{x\sim p_{\text{data}}(x)}[\log{D(x)}] +  \mathbb{E}_{z\sim p_{\text{generated}}(z)}[1 - \log{D(G(z))}]
+</div></code></code></pre>
+<h3 id="variational-auto-encodervae">Variational Auto-Encoder(VAE)</h3>
+<p>Paper: <a href="https://arxiv.org/abs/1312.6114">Auto-Encoding Variational Bayes</a></p>
+<h4 id="reparameterization-trick">Reparameterization trick</h4>
+<p>To produce a latent variable z such that  <img src="https://render.githubusercontent.com/render/math?math=z%20%5Csim%20q_%7B%5Cmu%2C%20%5Csigma%7D%28z%29%20%3D%20%5Cmathcal%7BN%7D%28%5Cmu%2C%20%5Csigma%5E2%29" alt="math"> , we sample  <img src="https://render.githubusercontent.com/render/math?math=%5Cepsilon%20%5Csim%20%5Cmathcal%7BN%7D%280%2C1%29" alt="math"> , than z is produced by</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=z%20%3D%20%5Cmu%20%2B%20%5Cepsilon%20%5Ccdot%20%5Csigma" alt="math"></p>
+<pre><code><code><div>z \sim q_{\mu, \sigma}(z) = \mathcal{N}(\mu, \sigma^2)
+\epsilon \sim \mathcal{N}(0,1)
+z = \mu + \epsilon \cdot \sigma
+</div></code></code></pre>
+<p>Above is for 1-D case. For a multi-dimensional (vector) case we use:</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=%5Cvec%7B%5Cepsilon%7D%20%5Csim%20%5Cmathcal%7BN%7D%280%2C%20%5Ctextbf%7BI%7D%29" alt="math"></p>
+<p><img src="https://render.githubusercontent.com/render/math?math=%5Cvec%7Bz%7D%20%5Csim%20%5Cmathcal%7BN%7D%28%5Cvec%7B%5Cmu%7D%2C%20%5Csigma%5E2%20%5Ctextbf%7BI%7D%29" alt="math"></p>
+<pre><code><code><div>\epsilon \sim \mathcal{N}(0, \textbf{I})
+\vec{z} \sim \mathcal{N}(\vec{\mu}, \sigma^2 \textbf{I})
+</div></code></code></pre>
+<h2 id="activations">Activations</h2>
+<h3 id="sigmoid">Sigmoid</h3>
+<p>Related to <em>Logistic Regression</em>. For single-label/multi-label binary classification.</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=%5Csigma%28z%29%20%3D%20%5Cfrac%7B1%7D%20%7B1%20%2B%20e%5E%7B-z%7D%7D" alt="math"></p>
+<pre><code><code><div>\sigma(z) = \frac{1} {1 + e^{-z}}
+</div></code></code></pre>
+<h3 id="softmax">Softmax</h3>
+<p>For multi-class single label classification.</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=%5Csigma%28z_i%29%20%3D%20%5Cfrac%7Be%5E%7Bz_%7Bi%7D%7D%7D%7B%5Csum_%7Bj%3D1%7D%5EK%20e%5E%7Bz_%7Bj%7D%7D%7D%20%5C%20%5C%20%5C%20for%5C%20i%3D1%2C2%2C%5Cdots%2CK" alt="math"></p>
+<pre><code><code><div>\sigma(z_i) = \frac{e^{z_{i}}}{\sum_{j=1}^K e^{z_{j}}} \ \ \ for\ i=1,2,\dots,K
+</div></code></code></pre>
+<h3 id="relu">Relu</h3>
+<p><img src="https://render.githubusercontent.com/render/math?math=Relu%28z%29%20%3D%20max%280%2C%20z%29" alt="math"></p>
+<pre><code><code><div>Relu(z) = max(0, z)
+</div></code></code></pre>
+<h2 id="loss">Loss</h2>
+<h3 id="regression">Regression</h3>
+<p>Below  <img src="https://render.githubusercontent.com/render/math?math=x" alt="math">  and  <img src="https://render.githubusercontent.com/render/math?math=y" alt="math">  are  <img src="https://render.githubusercontent.com/render/math?math=D" alt="math">  dimensional vectors, and  <img src="https://render.githubusercontent.com/render/math?math=x_i" alt="math">  denotes the value on the  <img src="https://render.githubusercontent.com/render/math?math=i" alt="math"> th dimension of  <img src="https://render.githubusercontent.com/render/math?math=x" alt="math"> .</p>
+<h4 id="mean-absolute-errormae">Mean Absolute Error(MAE)</h4>
+<p><img src="https://render.githubusercontent.com/render/math?math=%5Csum_%7Bi%3D1%7D%5E%7BD%7D%7Cx_i-y_i%7C" alt="math"></p>
+<pre><code><code><div>\sum_{i=1}^{D}|x_i-y_i|
+</div></code></code></pre>
+<h4 id="mean-squared-errormse">Mean Squared Error(MSE)</h4>
+<p><img src="https://render.githubusercontent.com/render/math?math=%5Csum_%7Bi%3D1%7D%5E%7BD%7D%28x_i-y_i%29%5E2" alt="math"></p>
+<pre><code><code><div>\sum_{i=1}^{D}(x_i-y_i)^2
+</div></code></code></pre>
+<h4 id="huber-loss">Huber loss</h4>
+<p>It’s less sensitive to outliers than the MSE as it treats error as square only inside an interval.</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=L_%7B%5Cdelta%7D%3D%0A%20%20%20%20%5Cleft%5C%7B%5Cbegin%7Bmatrix%7D%0A%20%20%20%20%20%20%20%20%5Cfrac%7B1%7D%7B2%7D%28y%20-%20%5Chat%7By%7D%29%5E%7B2%7D%20%26%20if%20%5Cleft%20%7C%20%28y%20-%20%5Chat%7By%7D%29%20%20%5Cright%20%7C%20%3C%20%5Cdelta%5C%5C%0A%20%20%20%20%20%20%20%20%5Cdelta%20%28%28y%20-%20%5Chat%7By%7D%29%20-%20%5Cfrac1%202%20%5Cdelta%29%20%26%20otherwise%0A%20%20%20%20%5Cend%7Bmatrix%7D%5Cright." alt="math"></p>
+<pre><code><code><div>L_{\delta}=
+    \left\{\begin{matrix}
+        \frac{1}{2}(y - \hat{y})^{2} &amp; if \left | (y - \hat{y})  \right | &lt; \delta\\
+        \delta ((y - \hat{y}) - \frac1 2 \delta) &amp; otherwise
+    \end{matrix}\right.
+</div></code></code></pre>
+<h3 id="classification">Classification</h3>
+<h4 id="cross-entropy">Cross Entropy</h4>
+<ul>
+<li>In binary classification, where the number of classes  <img src="https://render.githubusercontent.com/render/math?math=M" alt="math">  equals 2, Binary Cross-Entropy(BCE) can be calculated as:</li>
+</ul>
+<p><img src="https://render.githubusercontent.com/render/math?math=-%7B%28y%5Clog%28p%29%20%2B%20%281%20-%20y%29%5Clog%281%20-%20p%29%29%7D" alt="math"></p>
+<ul>
+<li>If  <img src="https://render.githubusercontent.com/render/math?math=M%20%3E%202" alt="math">  (i.e. multiclass classification), we calculate a separate loss for each class label per observation and sum the result.</li>
+</ul>
+<p><img src="https://render.githubusercontent.com/render/math?math=-%5Csum_%7Bc%3D1%7D%5EMy_%7Bo%2Cc%7D%5Clog%28p_%7Bo%2Cc%7D%29" alt="math"></p>
+<pre><code><code><div>-{(y\log(p) + (1 - y)\log(1 - p))}
+
+-\sum_{c=1}^My_{o,c}\log(p_{o,c})
+</div></code></code></pre>
+<blockquote>
+<p>M - number of classes</p>
+<p>log - the natural log</p>
+<p>y - binary indicator (0 or 1) if class label c is the correct classification for observation o</p>
+<p>p - predicted probability observation o is of class c</p>
+</blockquote>
+<h4 id="negative-loglikelihood">Negative Loglikelihood</h4>
+<p><img src="https://render.githubusercontent.com/render/math?math=NLL%28y%29%20%3D%20-%7B%5Clog%28p%28y%29%29%7D" alt="math"></p>
+<p>Minimizing negative loglikelihood</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=%5Cmin_%7B%5Ctheta%7D%20%5Csum_y%20%7B-%5Clog%28p%28y%3B%5Ctheta%29%29%7D" alt="math"></p>
+<p>is equivalent to Maximum Likelihood Estimation(MLE).</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=%5Cmax_%7B%5Ctheta%7D%20%5Cprod_y%20p%28y%3B%5Ctheta%29" alt="math"></p>
+<p>Here  <img src="https://render.githubusercontent.com/render/math?math=p%28y%29" alt="math">  is a <em>scaler</em> instead of <em>vector</em>. It is the value of the single dimension where the ground truth  <img src="https://render.githubusercontent.com/render/math?math=y" alt="math">  lies. It is thus equivalent to cross entropy (See <a href="https://en.wikipedia.org/wiki/Cross_entropy">wiki</a>).\</p>
+<pre><code><code><div>NLL(y) = -{\log(p(y))}
+
+\min_{\theta} \sum_y {-\log(p(y;\theta))}
+
+\max_{\theta} \prod_y p(y;\theta)
+</div></code></code></pre>
+<h4 id="hinge-loss">Hinge loss</h4>
+<p>Used in Support Vector Machine(SVM).</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=max%280%2C%201%20-%20y%20%5Ccdot%20%5Chat%7By%7D%29" alt="math"></p>
+<pre><code><code><div>max(0, 1 - y \cdot \hat{y})
+</div></code></code></pre>
+<h4 id="kljs-divergence">KL/JS divergence</h4>
+<p><img src="https://render.githubusercontent.com/render/math?math=KL%28%5Chat%7By%7D%20%7C%7C%20y%29%20%3D%20%5Csum_%7Bc%3D1%7D%5E%7BM%7D%5Chat%7By%7D_c%20%5Clog%7B%5Cfrac%7B%5Chat%7By%7D_c%7D%7By_c%7D%7D" alt="math"></p>
+<p><img src="https://render.githubusercontent.com/render/math?math=JS%28%5Chat%7By%7D%20%7C%7C%20y%29%20%3D%20%5Cfrac%7B1%7D%7B2%7D%28KL%28y%7C%7C%5Cfrac%7By%2B%5Chat%7By%7D%7D%7B2%7D%29%20%2B%20KL%28%5Chat%7By%7D%7C%7C%5Cfrac%7By%2B%5Chat%7By%7D%7D%7B2%7D%29%29" alt="math"></p>
+<pre><code><code><div>KL(\hat{y} || y) = \sum_{c=1}^{M}\hat{y}_c \log{\frac{\hat{y}_c}{y_c}}
+
+v
+</div></code></code></pre>
+<h3 id="regularization">Regularization</h3>
+<p>The  <img src="https://render.githubusercontent.com/render/math?math=Error" alt="math">  below can be any of the above loss.</p>
+<h4 id="l1-regularization">L1 regularization</h4>
+<p>A regression model that uses L1 regularization technique is called <em>Lasso Regression</em>.</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=Loss%20%3D%20Error%28Y%20-%20%5Cwidehat%7BY%7D%29%20%2B%20%5Clambda%20%5Csum_1%5En%20%7Cw_i%7C" alt="math"></p>
+<pre><code><code><div>Loss = Error(Y - \widehat{Y}) + \lambda \sum_1^n |w_i|
+</div></code></code></pre>
+<h4 id="l2-regularization">L2 regularization</h4>
+<p>A regression model that uses L1 regularization technique is called <em>Ridge Regression</em>.</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=Loss%20%3D%20Error%28Y%20-%20%5Cwidehat%7BY%7D%29%20%2B%20%20%5Clambda%20%5Csum_1%5En%20w_i%5E%7B2%7D" alt="math"></p>
+<pre><code><code><div>Loss = Error(Y - \widehat{Y}) +  \lambda \sum_1^n w_i^{2}
+</div></code></code></pre>
+<h2 id="metrics">Metrics</h2>
+<p>Some of them overlaps with loss, like MAE, KL-divergence.</p>
+<h3 id="classification-1">Classification</h3>
+<h4 id="accuracy-precision-recall-f1">Accuracy, Precision, Recall, F1</h4>
+<p><img src="https://render.githubusercontent.com/render/math?math=Accuracy%20%3D%20%5Cfrac%7BTP%2BTF%7D%7BTP%2BTF%2BFP%2BFN%7D" alt="math"></p>
+<p><img src="https://render.githubusercontent.com/render/math?math=Precision%20%3D%20%5Cfrac%7BTP%7D%7BTP%2BFP%7D" alt="math"></p>
+<p><img src="https://render.githubusercontent.com/render/math?math=Recall%20%3D%20%5Cfrac%7BTP%7D%7BTP%2BFN%7D" alt="math"></p>
+<p><img src="https://render.githubusercontent.com/render/math?math=F1%20%3D%20%5Cfrac%7B2%2APrecision%2ARecall%7D%7BPrecision%2BRecall%7D%20%3D%20%5Cfrac%7B2%2ATP%7D%7B2%2ATP%2BFP%2BFN%7D" alt="math"></p>
+<pre><code><code><div>Accuracy = \frac{TP+TF}{TP+TF+FP+FN}
+Precision = \frac{TP}{TP+FP}
+Recall = \frac{TP}{TP+FN}
+F1 = \frac{2*Precision*Recall}{Precision+Recall} = \frac{2*TP}{2*TP+FP+FN}
+</div></code></code></pre>
+<h4 id="sensitivity-specificity-and-auc">Sensitivity, Specificity and AUC</h4>
+<p><img src="https://render.githubusercontent.com/render/math?math=Sensitivity%20%3D%20Recall%20%3D%20%5Cfrac%7BTP%7D%7BTP%2BFN%7D" alt="math"></p>
+<p><img src="https://render.githubusercontent.com/render/math?math=Specificity%20%3D%20%5Cfrac%7BTN%7D%7BFP%2BTN%7D" alt="math"></p>
+<pre><code><code><div>Sensitivity = Recall = \frac{TP}{TP+FN}
+Specificity = \frac{TN}{FP+TN}
+</div></code></code></pre>
+<p>AUC is calculated as the Area Under the  <img src="https://render.githubusercontent.com/render/math?math=Sensitivity" alt="math"> (TPR)- <img src="https://render.githubusercontent.com/render/math?math=%281-Specificity%29" alt="math"> (FPR) Curve.</p>
+<h3 id="regression-1">Regression</h3>
+<p>MAE, MSE, equation <a href="#loss">above</a>.</p>
+<h3 id="clustering">Clustering</h3>
+<h4 id="normalized-mutual-information-nmi">(Normalized) Mutual Information (NMI)</h4>
+<p>The Mutual Information is a measure of the similarity between two labels of the same data. Where  <img src="https://render.githubusercontent.com/render/math?math=%7CU_i%7C" alt="math">  is the number of the samples in cluster  <img src="https://render.githubusercontent.com/render/math?math=U_i" alt="math">  and  <img src="https://render.githubusercontent.com/render/math?math=%7CV_i%7C" alt="math">  is the number of the samples in cluster  <img src="https://render.githubusercontent.com/render/math?math=V_i" alt="math">  , the Mutual Information between cluster  <img src="https://render.githubusercontent.com/render/math?math=U" alt="math">  and  <img src="https://render.githubusercontent.com/render/math?math=V" alt="math">  is given as:</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=MI%28U%2CV%29%3D%5Csum_%7Bi%3D1%7D%5E%7B%7CU%7C%7D%20%5Csum_%7Bj%3D1%7D%5E%7B%7CV%7C%7D%20%5Cfrac%7B%7CU_i%5Ccap%20V_j%7C%7D%7BN%7D%0A%5Clog%5Cfrac%7BN%7CU_i%20%5Ccap%20V_j%7C%7D%7B%7CU_i%7C%7CV_j%7C%7D" alt="math"></p>
+<pre><code><code><div>MI(U,V)=\sum_{i=1}^{|U|} \sum_{j=1}^{|V|} \frac{|U_i\cap V_j|}{N}
+\log\frac{N|U_i \cap V_j|}{|U_i||V_j|}
+</div></code></code></pre>
+<p>Normalized Mutual Information (NMI) is a normalization of the Mutual Information (MI) score to scale the results between 0 (no mutual information) and 1 (perfect correlation). In this function, mutual information is normalized by some generalized mean of H(labels_true) and H(labels_pred)), See <a href="https://en.wikipedia.org/wiki/Mutual_information#Normalized_variants">wiki</a>.</p>
+<p>Skip <a href="https://en.wikipedia.org/wiki/Rand_index">RI, ARI</a> for complexity.</p>
+<p>Also skip metrics for related tasks (e.g. modularity for community detection[graph clustering], coherence score for topic modeling[soft clustering]).</p>
+<h3 id="ranking">Ranking</h3>
+<p>Skip nDCG (Normalized Discounted Cumulative Gain) for its complexity.</p>
+<h4 id="mean-average-precisionmap">(Mean) Average Precision(MAP)</h4>
+<p>Average Precision is calculated as:</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=%5Ctext%7BAP%7D%20%3D%20%5Csum_n%20%28R_n%20-%20R_%7Bn-1%7D%29%20P_n" alt="math"></p>
+<pre><code><code><div>\text{AP} = \sum_n (R_n - R_{n-1}) P_n
+</div></code></code></pre>
+<p>where  <img src="https://render.githubusercontent.com/render/math?math=R_n" alt="math">  and  <img src="https://render.githubusercontent.com/render/math?math=P_n" alt="math">  are the precision and recall at the  <img src="https://render.githubusercontent.com/render/math?math=n" alt="math"> th threshold,</p>
+<p>MAP is the mean of AP over all the queries.</p>
+<h3 id="similarityrelevance">Similarity/Relevance</h3>
+<h4 id="cosine">Cosine</h4>
+<p><img src="https://render.githubusercontent.com/render/math?math=Cosine%28x%2Cy%29%20%3D%20%5Cfrac%7Bx%20%5Ccdot%20y%7D%7B%7Cx%7C%7Cy%7C%7D" alt="math"></p>
+<pre><code><code><div>Cosine(x,y) = \frac{x \cdot y}{|x||y|}
+</div></code></code></pre>
+<h4 id="jaccard">Jaccard</h4>
+<p>Similarity of two sets  <img src="https://render.githubusercontent.com/render/math?math=U" alt="math">  and  <img src="https://render.githubusercontent.com/render/math?math=V" alt="math"> .</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=Jaccard%28U%2CV%29%20%3D%20%5Cfrac%7B%7CU%20%5Ccap%20V%7C%7D%7B%7CU%20%5Ccup%20V%7C%7D" alt="math"></p>
+<pre><code><code><div>Jaccard(U,V) = \frac{|U \cap V|}{|U \cup V|}
+</div></code></code></pre>
+<h4 id="pointwise-mutual-informationpmi">Pointwise Mutual Information(PMI)</h4>
+<p>Relevance of two events  <img src="https://render.githubusercontent.com/render/math?math=x" alt="math">  and  <img src="https://render.githubusercontent.com/render/math?math=y" alt="math"> .</p>
+<p><img src="https://render.githubusercontent.com/render/math?math=PMI%28x%3By%29%20%3D%20%5Clog%7B%5Cfrac%7Bp%28x%2Cy%29%7D%7Bp%28x%29p%28y%29%7D%7D" alt="math"></p>
+<pre><code><code><div>PMI(x;y) = \log{\frac{p(x,y)}{p(x)p(y)}}
+</div></code></code></pre>
+<p>For example,  <img src="https://render.githubusercontent.com/render/math?math=p%28x%29" alt="math">  and  <img src="https://render.githubusercontent.com/render/math?math=p%28y%29" alt="math">  is the frequency of word  <img src="https://render.githubusercontent.com/render/math?math=x" alt="math">  and  <img src="https://render.githubusercontent.com/render/math?math=y" alt="math">  appearing in corpus and  <img src="https://render.githubusercontent.com/render/math?math=p%28x%2Cy%29" alt="math">  is the frequency of the co-occurrence of the two.</p>
+<h2 id="notes">Notes</h2>
+<p>This repository now only contains simple equations for ML. They are mainly about deep learning and NLP now due to personal research interests.</p>
+<p>For time issues, elegant equations in traditional ML approaches like SVM, SVD, PCA, LDA are not included yet.</p>
+<p>Moreover, there is a trend towards more complex metrics, which have to be calculated with complicated program (e.g. BLEU, ROUGE, METEOR), iterative algorithms (e.g. PageRank), optimization (e.g. Earth Mover Distance), or even learning based (e.g. BERTScore). They thus cannot be described using simple equations.</p>
+<h2 id="reference">Reference</h2>
+<p><a href="https://pytorch.org/docs/master/nn.html">Pytorch Documentation</a></p>
+<p><a href="https://scikit-learn.org/stable/modules/classes.html">Scikit-learn Documentation</a></p>
+<p><a href="https://ml-cheatsheet.readthedocs.io/en/latest/index.html">Machine Learning Glossary</a></p>
+<p><a href="https://en.wikipedia.org/">Wikipedia</a></p>
+<p><a href="https://blog.floydhub.com/gans-story-so-far/">https://blog.floydhub.com/gans-story-so-far/</a></p>
+<p><a href="https://ermongroup.github.io/cs228-notes/extras/vae/">https://ermongroup.github.io/cs228-notes/extras/vae/</a></p>
+<p>Thanks for <a href="https://gist.github.com/a-rodin/fef3f543412d6e1ec5b6cf55bf197d7b">a-rodin's solution</a> to show Latex in Github markdown, which I have wrapped into <code>latex2pic.py</code>.</p>
+
+    </body>
+    </html>
