@@ -384,7 +384,7 @@ Some of them overlaps with loss, like MAE, KL-divergence.
 
 #### Accuracy, Precision, Recall, F1
 
-$$Accuracy = \frac{TP+TF}{TP+TF+FP+FN}$$
+$$Accuracy = \frac{TP+TN}{TP+TN+FP+FN}$$
 
 $$Precision = \frac{TP}{TP+FP}$$
 
@@ -393,7 +393,7 @@ $$Recall = \frac{TP}{TP+FN}$$
 $$F1 = \frac{2*Precision*Recall}{Precision+Recall} = \frac{2*TP}{2*TP+FP+FN}$$
 
 ```
-Accuracy = \frac{TP+TF}{TP+TF+FP+FN}
+Accuracy = \frac{TP+TN}{TP+TN+FP+FN}
 Precision = \frac{TP}{TP+FP}
 Recall = \frac{TP}{TP+FN}
 F1 = \frac{2*Precision*Recall}{Precision+Recall} = \frac{2*TP}{2*TP+FP+FN}
