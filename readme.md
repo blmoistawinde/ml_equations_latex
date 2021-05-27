@@ -500,7 +500,7 @@ Some of them overlaps with loss, like MAE, KL-divergence.
 
 
 
-![math](https://render.githubusercontent.com/render/math?math=Accuracy%20%3D%20%5Cfrac%7BTP%2BTF%7D%7BTP%2BTF%2BFP%2BFN%7D)
+![math](https://render.githubusercontent.com/render/math?math=Accuracy%20%3D%20%5Cfrac%7BTP%2BTN%7D%7BTP%2BTN%2BFP%2BFN%7D)
 
 
 
@@ -523,7 +523,7 @@ Some of them overlaps with loss, like MAE, KL-divergence.
 
 
 ```
-Accuracy = \frac{TP+TF}{TP+TF+FP+FN}
+Accuracy = \frac{TP+TN}{TP+TN+FP+FN}
 Precision = \frac{TP}{TP+FP}
 Recall = \frac{TP}{TP+FN}
 F1 = \frac{2*Precision*Recall}{Precision+Recall} = \frac{2*TP}{2*TP+FP+FN}
