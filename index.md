@@ -54,10 +54,10 @@ Better viewed at https://blmoistawinde.github.io/ml_equations_latex/
 
 ### RNNs(LSTM, GRU)
 
-encoder hidden state $h_t$ at time step $t$
+encoder hidden state $h_t$ at time step $t$, with input token embedding $x_t$
 $$h_t = RNN_{enc}(x_t, h_{t-1})$$
 
-decoder hidden state $s_t$ at time step $t$
+decoder hidden state $s_t$ at time step $t$, with input token embedding $y_t$
 
 $$s_t = RNN_{dec}(y_t, s_{t-1})$$
 
@@ -83,7 +83,7 @@ $$
 $$
 
 $$
-e_{ik} = a(s_{i-1}, h_j)
+e_{ij} = a(s_{i-1}, h_j)
 $$
 
 ```
@@ -91,7 +91,7 @@ c_i = \sum_{j=1}^{T_x} \alpha_{ij}h_j
 
 \alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{k=1}^{T_x} \exp(e_{ik})}
 
-e_{ik} = a(s_{i-1}, h_j)
+e_{ij} = a(s_{i-1}, h_j)
 ```
 
 $a$ is an specific attention function, which can be
@@ -100,10 +100,10 @@ $a$ is an specific attention function, which can be
 
 Paper: [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/abs/1409.0473)
 
-$$e_{ik} = v^T tanh(W[s_{i-1}; h_j])$$
+$$e_{ij} = v^T tanh(W[s_{i-1}; h_j])$$
 
 ```
-e_{ik} = v^T tanh(W[s_{i-1}; h_j])
+e_{ij} = v^T tanh(W[s_{i-1}; h_j])
 ```
 
 #### Luong(Dot-Product) Attention
@@ -112,16 +112,16 @@ Paper: [Effective Approaches to Attention-based Neural Machine Translation](http
 
 If $s_i$ and $h_j$ has same number of dimension.
 
-$$e_{ik} = s_{i-1}^T h_j$$
+$$e_{ij} = s_{i-1}^T h_j$$
 
 otherwise
 
-$$e_{ik} = s_{i-1}^T W h_j$$
+$$e_{ij} = s_{i-1}^T W h_j$$
 
 ```
-e_{ik} = s_{i-1}^T h_j
+e_{ij} = s_{i-1}^T h_j
 
-e_{ik} = s_{i-1}^T W h_j
+e_{ij} = s_{i-1}^T W h_j
 ```
 
 Finally, the output $o_i$ is produced by:
@@ -453,7 +453,9 @@ $$\text{AP} = \sum_n (R_n - R_{n-1}) P_n$$
 \text{AP} = \sum_n (R_n - R_{n-1}) P_n
 ```
 
-where $R_n$ and $P_n$ are the precision and recall at the $n$th threshold,
+where $R_n$ and $P_n$ are the precision and recall at the $n$th threshold.
+
+AP can also be regarded as the area under the precision-recall curve.
 
 MAP is the mean of AP over all the queries.
 

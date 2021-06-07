@@ -54,14 +54,14 @@ Better viewed at https://blmoistawinde.github.io/ml_equations_latex/
 
 ### RNNs(LSTM, GRU)
 
-encoder hidden state  ![math](https://render.githubusercontent.com/render/math?math=h_t)  at time step  ![math](https://render.githubusercontent.com/render/math?math=t) 
+encoder hidden state  ![math](https://render.githubusercontent.com/render/math?math=h_t)  at time step  ![math](https://render.githubusercontent.com/render/math?math=t) , with input token embedding  ![math](https://render.githubusercontent.com/render/math?math=x_t) 
 
 
 ![math](https://render.githubusercontent.com/render/math?math=h_t%20%3D%20RNN_%7Benc%7D%28x_t%2C%20h_%7Bt-1%7D%29)
 
 
 
-decoder hidden state  ![math](https://render.githubusercontent.com/render/math?math=s_t)  at time step  ![math](https://render.githubusercontent.com/render/math?math=t) 
+decoder hidden state  ![math](https://render.githubusercontent.com/render/math?math=s_t)  at time step  ![math](https://render.githubusercontent.com/render/math?math=t) , with input token embedding  ![math](https://render.githubusercontent.com/render/math?math=y_t) 
 
 
 
@@ -98,7 +98,7 @@ The attention weight  ![math](https://render.githubusercontent.com/render/math?m
 
 
 
-![math](https://render.githubusercontent.com/render/math?math=e_%7Bik%7D%20%3D%20a%28s_%7Bi-1%7D%2C%20h_j%29)
+![math](https://render.githubusercontent.com/render/math?math=e_%7Bij%7D%20%3D%20a%28s_%7Bi-1%7D%2C%20h_j%29)
 
 
 
@@ -107,7 +107,7 @@ c_i = \sum_{j=1}^{T_x} \alpha_{ij}h_j
 
 \alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{k=1}^{T_x} \exp(e_{ik})}
 
-e_{ik} = a(s_{i-1}, h_j)
+e_{ij} = a(s_{i-1}, h_j)
 ```
 
  ![math](https://render.githubusercontent.com/render/math?math=a)  is an specific attention function, which can be
@@ -118,12 +118,12 @@ Paper: [Neural Machine Translation by Jointly Learning to Align and Translate](h
 
 
 
-![math](https://render.githubusercontent.com/render/math?math=e_%7Bik%7D%20%3D%20v%5ET%20tanh%28W%5Bs_%7Bi-1%7D%3B%20h_j%5D%29)
+![math](https://render.githubusercontent.com/render/math?math=e_%7Bij%7D%20%3D%20v%5ET%20tanh%28W%5Bs_%7Bi-1%7D%3B%20h_j%5D%29)
 
 
 
 ```
-e_{ik} = v^T tanh(W[s_{i-1}; h_j])
+e_{ij} = v^T tanh(W[s_{i-1}; h_j])
 ```
 
 #### Luong(Dot-Product) Attention
@@ -134,7 +134,7 @@ If  ![math](https://render.githubusercontent.com/render/math?math=s_i)  and  ![m
 
 
 
-![math](https://render.githubusercontent.com/render/math?math=e_%7Bik%7D%20%3D%20s_%7Bi-1%7D%5ET%20h_j)
+![math](https://render.githubusercontent.com/render/math?math=e_%7Bij%7D%20%3D%20s_%7Bi-1%7D%5ET%20h_j)
 
 
 
@@ -142,14 +142,14 @@ otherwise
 
 
 
-![math](https://render.githubusercontent.com/render/math?math=e_%7Bik%7D%20%3D%20s_%7Bi-1%7D%5ET%20W%20h_j)
+![math](https://render.githubusercontent.com/render/math?math=e_%7Bij%7D%20%3D%20s_%7Bi-1%7D%5ET%20W%20h_j)
 
 
 
 ```
-e_{ik} = s_{i-1}^T h_j
+e_{ij} = s_{i-1}^T h_j
 
-e_{ik} = s_{i-1}^T W h_j
+e_{ij} = s_{i-1}^T W h_j
 ```
 
 Finally, the output  ![math](https://render.githubusercontent.com/render/math?math=o_i)  is produced by:
@@ -596,7 +596,9 @@ Average Precision is calculated as:
 \text{AP} = \sum_n (R_n - R_{n-1}) P_n
 ```
 
-where  ![math](https://render.githubusercontent.com/render/math?math=R_n)  and  ![math](https://render.githubusercontent.com/render/math?math=P_n)  are the precision and recall at the  ![math](https://render.githubusercontent.com/render/math?math=n) th threshold,
+where  ![math](https://render.githubusercontent.com/render/math?math=R_n)  and  ![math](https://render.githubusercontent.com/render/math?math=P_n)  are the precision and recall at the  ![math](https://render.githubusercontent.com/render/math?math=n) th threshold.
+
+AP can also be regarded as the area under the precision-recall curve.
 
 MAP is the mean of AP over all the queries.
 
