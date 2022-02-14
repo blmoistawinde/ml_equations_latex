@@ -19,8 +19,10 @@ Better viewed at https://blmoistawinde.github.io/ml_equations_latex/
       - [Reparameterization trick](#reparameterization-trick)
   - [Activations](#activations)
     - [Sigmoid](#sigmoid)
+    - [Tanh](#tanh)
     - [Softmax](#softmax)
     - [Relu](#relu)
+    - [Gelu](#gelu)
   - [Loss](#loss)
     - [Regression](#regression)
       - [Mean Absolute Error(MAE)](#mean-absolute-errormae)
@@ -280,6 +282,18 @@ Related to *Logistic Regression*. For single-label/multi-label binary classifica
 \sigma(z) = \frac{1} {1 + e^{-z}}
 ```
 
+### Tanh
+
+
+
+![math](https://render.githubusercontent.com/render/math?math=tanh%28x%29%20%3D%20%5Cfrac%7Be%5Ex%20-%20e%5E%7B-x%7D%7D%7Be%5Ex%20%2B%20e%5E%7B-x%7D%7D%20%3D%20%5Cfrac%7B1%20-%20e%5E%7B-2x%7D%7D%7B1%20%2B%20e%5E%7B-2x%7D%7D)
+
+
+
+```
+tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} = \frac{1 - e^{-2x}}{1 + e^{-2x}}
+```
+
 ### Softmax
 
 For multi-class single label classification.
@@ -304,6 +318,20 @@ For multi-class single label classification.
 
 ```
 Relu(z) = max(0, z)
+```
+
+### Gelu
+
+
+
+![math](https://render.githubusercontent.com/render/math?math=Gelu%28x%29%20%3D%20x%5CPhi%28x%29)
+
+
+
+where  ![math](https://render.githubusercontent.com/render/math?math=%5CPhi%28x%29)  is the cumulative distribution function of Gaussian distribution.
+
+```
+Gelu(x) = x\Phi(x)
 ```
 
 ## Loss
