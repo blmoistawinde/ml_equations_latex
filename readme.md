@@ -219,12 +219,14 @@ Paper: [Generative Adversarial Networks](https://arxiv.org/abs/1406.2661)
 
 
 
-![math](https://render.githubusercontent.com/render/math?math=%5Cmin_%7BG%7D%5Cmax_%7BD%7D%5Cmathbb%7BE%7D_%7Bx%5Csim%20p_%7B%5Ctext%7Bdata%7D%7D%28x%29%7D%5B%5Clog%7BD%28x%29%7D%5D%20%2B%20%20%5Cmathbb%7BE%7D_%7Bz%5Csim%20p_%7B%5Ctext%7Bz%7D%7D%28z%29%7D%5B1%20-%20%5Clog%7BD%28G%28z%29%29%7D%5D)
+```math
+\min_{G}\max_{D}V(D, G) = \mathbb{E}_{x\sim p_{\text{data}}(x)}[\log{D(x)}] +  \mathbb{E}_{z\sim p_{\text{z}}(z)}[\log{(1-D(G(z)))}]
+```
 
 
 
 ```
-\min_{G}\max_{D}\mathbb{E}_{x\sim p_{\text{data}}(x)}[\log{D(x)}] +  \mathbb{E}_{z\sim p_{\text{z}}(z)}[1 - \log{D(G(z))}]
+\min_{G}\max_{D}V(D, G) = \mathbb{E}_{x\sim p_{\text{data}}(x)}[\log{D(x)}] +  \mathbb{E}_{z\sim p_{\text{z}}(z)}[\log{(1-D(G(z)))}]
 ```
 
 
